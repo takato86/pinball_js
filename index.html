@@ -2,6 +2,7 @@
 <html>
     <header>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/index.css">
         <title>Pinball</title>    
     </header>
     <body>
@@ -120,7 +121,8 @@ polygon 0.75 0.025 0.8 0.24 0.725 0.27 0.7 0.025`;
         
         document.body.addEventListener('keydown', e => {
             user_action = e.key;
-        });
+        }, {passive: false});
+
         document.body.addEventListener('keyup', e=>{
             user_action = '';
         });
