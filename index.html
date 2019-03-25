@@ -10,9 +10,9 @@
           <code>&lt;canvas&gt;</code> 要素をサポートしていません。
         </canvas>
     </body>
-    <script src="PinballObstacle.js"></script>
-    <script src="Ball.js"></script>
-    <script src="VectorUtils.js"></script>
+    <script src="js/PinballObstacle.js"></script>
+    <script src="js/Ball.js"></script>
+    <script src="js/VectorUtils.js"></script>
     <script type="text/javascript">
         const canvas = document.querySelector("#glcanvas");
         var context = canvas.getContext("2d");
@@ -114,9 +114,17 @@ polygon 0.75 0.025 0.8 0.24 0.725 0.27 0.7 0.025`;
         let ball;
         let counter = 0;
         let current_act = 4;
+        let user_action = '';
 
         window.onload = start();
         
+        document.body.addEventListener('keydown', e => {
+            user_action = e.key;
+        });
+        document.body.addEventListener('keyup', e=>{
+            user_action = '';
+        });
+
         function step(action = 4){
             counter++;
             //TODO Random move
@@ -277,7 +285,14 @@ polygon 0.75 0.025 0.8 0.24 0.725 0.27 0.7 0.025`;
         }
 
         (function loop(){
-            current_act = Math.floor(Math.random() * 5);
+            current_act = 4; //Math.floor(Math.random() * 5);
+            switch(user_action){
+                case 'ArrowUp': current_act = 1; break;
+                case 'ArrowDown': current_act = 3; break;
+                case 'ArrowRight': current_act = 0; break;
+                case 'ArrowLeft': current_act = 2; break;
+                default: current_act = 4; break;
+            }
             if(!step(current_act)){
                 alert("game end");
                 return;
